@@ -798,7 +798,7 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
                                                                                target:self action:nil];
     NSMutableArray *items = [NSMutableArray new];
     if (_displayEditButton) {
-        [items addObject:_editButtonItem];
+        [items addObject:_rotateButton];
     }
     
     if (_displayActionButton)
