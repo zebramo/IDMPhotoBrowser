@@ -38,7 +38,7 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
     
 	// Toolbar
 	UIToolbar *_toolbar;
-	UIBarButtonItem *_previousButton, *_nextButton, *_actionButton;
+	UIBarButtonItem *_previousButton, *_nextButton, *_actionButton,*_rotateButton,*_deleteButton;
     UIBarButtonItem *_counterButton;
     UILabel *_counterLabel;
     
@@ -647,6 +647,9 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
                                                                   target:self
                                                                   action:@selector(actionButtonPressed:)];
     
+    
+    //
+    _deleteButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deleteButtonSelected:) ];
     // Gesture
     _panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureRecognized:)];
     [_panGesture setMinimumNumberOfTouches:1];
@@ -794,6 +797,9 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
     UIBarButtonItem *flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                                                target:self action:nil];
     NSMutableArray *items = [NSMutableArray new];
+    if (_displayEditButton) {
+        [items addObject:_editButtonItem];
+    }
     
     if (_displayActionButton)
         [items addObject:fixedLeftSpace];
@@ -814,6 +820,9 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
     
     if(_displayActionButton)
         [items addObject:_actionButton];
+    if (_displayDeleteButton) {
+        [items addObject:_deleteButton];
+    }
     
     [_toolbar setItems:items];
 	[self updateToolbar];
